@@ -1,3 +1,4 @@
+
 # Authentication API
 
 A simple authentication API built using NestJS and MongoDB with Mongoose. This app provides endpoints for user registration, login, and user management.
@@ -31,21 +32,30 @@ This will install all the necessary dependencies for the app to run.
 
 ### 3. Set up environment variables
 
-Create a `.env` file in the root directory and configure the environment variables for your MongoDB connection and JWT secret:
+Create a `.env` file in the root directory and configure the environment variables:
 
 ```env
-MONGO_URI=mongodb://localhost:27017/authapp
-JWT_SECRET=your_jwt_secret_key
-JWT_EXPIRATION=3600
+SERVER_HOST=127.0.0.1
+SERVER_PORT=3001
+
+DATABASE_HOST=localhost
+DATABASE_PORT=27017
+DATABASE_NAME=authApp
+DATABASE_USERNAME=
+DATABASE_PASSWORD=
+
+AUTH_JWT_KEY=secretKey
+AUTH_JWT_ACCESS_TOKEN_EXPIRATION=300s
+AUTH_JWT_ACCESS_REFRESH_EXPIRATION=24h
 ```
 
-You can change the `MONGO_URI` to point to a MongoDB Atlas cluster if you're using a cloud instance instead of a local MongoDB server.
+> 💡 If you're using MongoDB Atlas, make sure to update the database credentials accordingly.
 
 ### 4. Connect to MongoDB using Mongoose
 
 #### Option 1: Using MongoDB locally
 
-If you're running MongoDB locally, ensure you have MongoDB installed and running on your machine. You can start MongoDB using:
+Ensure MongoDB is installed and running on your machine. Start it with:
 
 ```bash
 mongod
@@ -55,22 +65,12 @@ This will start a local MongoDB instance on `mongodb://localhost:27017`.
 
 #### Option 2: Using MongoDB Atlas (Cloud)
 
-To connect to MongoDB Atlas, follow these steps:
-
 1. Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and sign up or log in.
 2. Create a new cluster.
-3. In the "Database" tab, click on "Connect" and follow the instructions to whitelist your IP address and create a database user.
-4. Copy the connection string provided and replace it in the `.env` file under the `MONGO_URI`.
-
-Example MongoDB Atlas URI:
-
-```env
-MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/authapp?retryWrites=true&w=majority
-```
+3. Whitelist your IP and create a database user.
+4. Copy the provided connection string and update your `.env` values accordingly.
 
 ### 5. Compile and run the project
-
-Once the environment variables are set and MongoDB is running, you can start the application.
 
 For development mode:
 
@@ -106,9 +106,9 @@ npm run test:cov
 
 ## Deployment
 
-When you're ready to deploy your NestJS application, follow the [NestJS Deployment Guide](https://docs.nestjs.com/faq/deployment) to deploy it efficiently.
+When you're ready to deploy your NestJS application, follow the deployment guide to deploy it efficiently.
 
-If you're using cloud platforms like AWS, you can use [Mau](https://mau.nestjs.com) to deploy with ease:
+If you're using cloud platforms like AWS, you can use Mau to deploy with ease:
 
 ```bash
 npm install -g mau
@@ -118,14 +118,13 @@ mau deploy
 ## Resources
 
 - [NestJS Documentation](https://docs.nestjs.com)
-- [MongoDB Documentation](https://docs.mongodb.com)
+- [MongoDB Documentation](https://www.mongodb.com/docs/)
 - [Mongoose Documentation](https://mongoosejs.com/docs/)
 
 ## License
 
-NestJS Authentication API is [MIT licensed](https://opensource.org/licenses/MIT).
+NestJS Authentication API is MIT licensed.
 
 ## Stay in touch
 
-**Author** – Ahmed Tahoun  
-**Email** – [ahmed.tahoun1997@gmail.com](mailto:ahmed.tahoun1997@gmail.com)
+**Author** - Ahmed Tahoun
